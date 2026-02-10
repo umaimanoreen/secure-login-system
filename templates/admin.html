@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Control Unit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: #00f2ff;
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(0, 242, 255, 0.1);
+            border-bottom: 2px solid #00f2ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 255, 204, 0.05);
+        }
+
+        .action-btn {
+            color: #00f2ff;
+            text-decoration: none;
+            border: 1px solid #00f2ff;
+            padding: 5px 10px;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #00f2ff;
+            color: black;
+            box-shadow: 0 0 10px #00f2ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="width: 800px; max-width: 90%;">
+        <h2 style="border-bottom: 1px solid #00f2ff; padding-bottom: 10px;">ADMIN CONTROL UNIT</h2>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>USERNAME</th>
+                        <th>EMAIL</th>
+                        <th>PASSWORD HASH (PROOF)</th>
+                        <th>ROLE</th>
+                        <th>ATTEMPTS</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                    <tr>
+                        <td>#{{u[0]}}</td>
+                        <td>{{u[1]}}</td>
+                        <td>{{u[6] if u[6] else 'N/A'}}</td>
+                        <td
+                            style="font-size: 10px; color: #555; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {{u[2]}}</td>
+                        <td><span style="color: {{ 'gold' if u[3] == 'admin' else 'white' }}">{{u[3].upper()}}</span>
+                        </td>
+                        <td style="color: {{ 'red' if u[4] > 0 else 'gray' }}">{{u[4]}}</td>
+                        <td>
+                            {% if u[5] == 1 %}
+                            <span style="color: #ff003c; font-weight: bold;">LOCKED</span>
+                            {% else %}
+                            <span style="color: #00ffcc;">ACTIVE</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/edit/{{u[0]}}" class="action-btn"
+                                style="border-color: gold; color: gold; margin-right: 5px; display: inline-block; margin-top: 0;">EDIT</a>
+                            <a href="/delete/{{u[0]}}" class="action-btn"
+                                style="border-color: red; color: red; margin-right: 5px; display: inline-block; margin-top: 0;"
+                                onclick="return confirm('PERMANENTLY DELETE USER?');">DELETE</a>
+                            {% if u[5] == 1 %}
+                            <a href="/unlock/{{u[0]}}" class="action-btn"
+                                style="display: inline-block; margin-top: 0;">UNLOCK</a>
+                            {% else %}
+                            <span style="color: gray;">--</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="/logs" class="action-btn" style="border-color: #ff003c; color: #ff003c; margin-right: 20px;">VIEW
+                SECURITY LOGS (AUDIT)</a>
+            <a href="/dashboard" style="color: white; text-decoration: none; border-bottom: 1px solid white;">RETURN TO
+                DASHBOARD</a>
+        </div>
+    </div>
+</body>
+
+</html>

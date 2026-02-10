@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>SECURE LOGIN</h2>
+        <form method="post">
+            <input name="username" placeholder="USERNAME" required>
+            <input type="password" name="password" placeholder="PASSWORD" required>
+            <button type="submit">LOGIN</button>
+        </form>
+        {% if msg %}
+        <div class="error-box">
+            <p class="error">{{msg}}</p>
+        </div>
+        {% endif %}
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/register">Create New Operative ID</a>
+            <br><br>
+            <a href="/webmail" style="font-size: 0.7em; color: #333; text-decoration: none;">[ ACCESS SIMULATED WEBMAIL
+                ]</a>
+        </div>
+    </div>
+</body>
+
+</html>

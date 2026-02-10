@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mainframe Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>ACCESS GRANTED</h2>
+
+        <div
+            style="border-left: 3px solid #00f2ff; padding: 15px; text-align: left; margin: 20px 0; background: rgba(0, 242, 255, 0.05);">
+            <p><strong>USER:</strong> {{user}}</p>
+            <p><strong>CLEARANCE:</strong> <span style="color: gold;">{{role.upper() if role else 'STANDARD'}}</span>
+            </p>
+            <p><strong>SESSION:</strong> ENCRYPTED AES-256</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+            <a href="/generate_report" class="action-btn"
+                style="text-align: center; border: 1px solid #00f2ff; padding: 15px; color: #00f2ff; text-decoration: none;">
+                GENERATE REPORT
+            </a>
+            <a href="/notifications" class="action-btn"
+                style="text-align: center; border: 1px solid #00f2ff; padding: 15px; color: #00f2ff; text-decoration: none;">
+                NOTIFICATIONS
+            </a>
+            <a href="/secure_comm" class="action-btn"
+                style="grid-column: span 2; text-align: center; border: 1px solid gold; padding: 15px; color: gold; text-decoration: none;">
+                SECURE COMMS (ENCRYPTED)
+            </a>
+        </div>
+
+        <div style="text-align: center;">
+            {% if role == 'admin' %}
+            <a href="/admin"
+                style="color: #ff003c; text-decoration: none; border: 1px solid #ff003c; padding: 10px; display: inline-block; margin-top: 20px; width: 100%;">ACCESS
+                ADMIN PANEL</a>
+            {% endif %}
+        </div>
+
+        <p style="font-size: 0.8em; color: gray;">Welcome to the secure command center. All actions are logged.</p>
+
+        <a href="/logout"
+            style="display: block; margin-top: 20px; padding: 10px; border: 1px solid red; color: red; text-decoration: none; text-align: center;">TERMINATE
+            SESSION (LOGOUT)</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>CREATE IDENTITY</h2>
+        <form method="post">
+            <input name="username" placeholder="USERNAME" required>
+            <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
+            <input type="password" name="password" placeholder="PASSWORD" required>
+            <small style="color: red; display: block; margin-bottom: 15px; font-size: 0.8em;">
+                ⚠️ Policy: EXACTLY 8 chars. Includes 1 Capital, 1 Number, 1 Special Char.
+            </small>
+            <select name="role">
+                <option value="user">STANDARD USER</option>
+                <option value="admin">ROOT ADMIN</option>
+            </select>
+            <button type="submit">SIGN UP</button>
+        </form>
+        {% if msg %}
+        <div class="error-box">
+            <p class="error">{{msg}}</p>
+        </div>
+        {% endif %}
+        <a href="/login">ALREADY REGISTERED? LOGIN</a>
+    </div>
+</body>
+
+</html>

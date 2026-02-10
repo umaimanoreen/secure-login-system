@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Secure Notifications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>INCOMING TRANSMISSIONS</h2>
+        <div
+            style="text-align: left; background: rgba(0, 242, 255, 0.05); padding: 15px; margin-bottom: 10px; border-left: 3px solid #00f2ff;">
+            <strong style="color: #00f2ff;">[SYSTEM]</strong> Welcome to the secure mainframe, Agent {{user}}.
+            <br><small style="color: gray;">Received: Just now</small>
+        </div>
+        {% if logins %}
+        {% for login in logins %}
+        <div
+            style="text-align: left; background: rgba(0, 242, 255, 0.05); padding: 15px; margin-bottom: 10px; border-left: 3px solid #00f2ff;">
+            <strong style="color: #00f2ff;">[USER LOG]</strong> {{ login[0] }} accessed the mainframe.
+            <br><small style="color: gray;">Time: {{ login[1] }}</small>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p style="color: gray;">No recent activity detected.</p>
+        {% endif %}
+        <a href="/dashboard"
+            style="display: block; margin-top: 20px; padding: 10px; border: 1px solid white; color: white; text-decoration: none; text-align: center;">RETURN
+            TO DASHBOARD</a>
+    </div>
+</body>
+
+</html>

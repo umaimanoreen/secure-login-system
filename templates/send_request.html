@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Uplink Request</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>SECURE UPLINK</h2>
+        <form method="post">
+            <label style="display: block; text-align: left; color: #00f2ff; margin-bottom: 5px;">REQUEST TYPE</label>
+            <select name="type"
+                style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid #00f2ff; color: white; margin-bottom: 15px;">
+                <option>Access Level Upgrade</option>
+                <option>Hardware Requisition</option>
+                <option>Leave of Absence</option>
+                <option>Report Security Breach</option>
+            </select>
+
+            <label style="display: block; text-align: left; color: #00f2ff; margin-bottom: 5px;">DETAILS</label>
+            <textarea name="details" rows="4"
+                style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid #00f2ff; color: white; margin-bottom: 20px; font-family: inherit;"></textarea>
+
+            <button>TRANSMIT REQUEST</button>
+        </form>
+        {% if msg %}
+        <p style="color: #00ffcc; margin-top: 15px; animation: blink 2s infinite;">{{ msg }}</p>
+        {% endif %}
+        <a href="/dashboard" style="display: block; margin-top: 20px; color: gray; text-decoration: none;">CANCEL
+            TRANSMISSION</a>
+    </div>
+</body>
+
+</html>

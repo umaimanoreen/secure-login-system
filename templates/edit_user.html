@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit User Identity</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>EDIT IDENTITY</h2>
+        <form method="post">
+            <label style="color: #00f2ff; display: block; text-align: left; margin-top: 10px;">CODENAME
+                (Username)</label>
+            <input name="username" value="{{ user[1] }}" required
+                style="background: rgba(0, 242, 255, 0.1); color: white; border: 1px solid #00f2ff;">
+
+            <label style="color: #00f2ff; display: block; text-align: left; margin-top: 10px;">SECURE UPLINK
+                (Email)</label>
+            <input type="email" name="email" value="{{ user[6] if user[6] else '' }}"
+                placeholder="Enter Email for Alerts"
+                style="background: rgba(0, 242, 255, 0.1); color: white; border: 1px solid #00f2ff;">
+
+            <label style="color: #00f2ff; display: block; text-align: left; margin-top: 10px;">CLEARANCE LEVEL
+                (Role)</label>
+            <select name="role"
+                style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; background: rgba(0, 242, 255, 0.1); color: white; border: 1px solid #00f2ff;">
+                <option value="user" {% if user[3]=='user' %}selected{% endif %}>STANDARD USER</option>
+                <option value="admin" {% if user[3]=='admin' %}selected{% endif %}>ADMINISTRATOR</option>
+            </select>
+
+            <button style="margin-top: 20px;">UPDATE RECORDS</button>
+        </form>
+
+        <p class="error" style="color: #ff003c;">{{ msg }}</p>
+
+        <a href="/admin"
+            style="color: white; text-decoration: none; border-bottom: 1px solid white; display: inline-block; margin-top: 15px;">CANCEL
+            OPERATION</a>
+    </div>
+</body>
+
+</html>

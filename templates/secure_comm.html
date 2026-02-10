@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Secure Link</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .comm-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .comm-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #00f2ff;
+            border: 1px solid #333;
+            padding: 10px;
+            font-family: monospace;
+            resize: vertical;
+        }
+
+        .result-box {
+            background: #111;
+            border: 1px dashed #333;
+            padding: 10px;
+            margin-top: 10px;
+            word-wrap: break-word;
+            min-height: 50px;
+            color: #0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="max-width: 800px;">
+        <h2>SECURE COMMUNICATION UPLINK</h2>
+
+        <div class="comm-panel">
+            <!-- ENCRYPTION MODULE -->
+            <div style="border-right: 1px solid #333; padding-right: 10px;">
+                <h3 style="color: gold;">ENCRYPT (OUTBOUND)</h3>
+                <form method="post" action="/secure_comm">
+                    <input type="hidden" name="action" value="encrypt">
+                    <textarea name="text" placeholder="ENTER CLASSIFIED MESSAGE..." required></textarea>
+                    <input name="key" type="password" placeholder="SECRET PASSPHRASE" required>
+                    <button type="submit" style="border-color: gold; color: gold;">ENCRYPT DATA</button>
+                </form>
+            </div>
+
+            <!-- DECRYPTION MODULE -->
+            <div style="padding-left: 10px;">
+                <h3 style="color: #00f2ff;">DECRYPT (INBOUND)</h3>
+                <form method="post" action="/secure_comm">
+                    <input type="hidden" name="action" value="decrypt">
+                    <textarea name="text" placeholder="PASTE ENCRYPTED HASH..." required></textarea>
+                    <input name="key" type="password" placeholder="SECRET PASSPHRASE" required>
+                    <button type="submit">DECRYPT DATA</button>
+                </form>
+            </div>
+        </div>
+
+        {% if output %}
+        <div style="margin-top: 30px; border-top: 2px solid #555; padding-top: 20px;">
+            <h3>PROCESSING RESULT:</h3>
+            <div class="result-box">
+                {% if mode == 'result_enc' %}
+                <span style="color: #aaa;">ENCRYPTED PACKET:</span><br>
+                {{output}}
+                {% elif mode == 'result_dec' %}
+                <span style="color: #aaa;">DECRYPTED MESSAGE:</span><br>
+                {{output}}
+                {% else %}
+                <span style="color: red;">{{output}}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="/dashboard">TERMINATE CONNECTION (RETURN)</a>
+        </div>
+    </div>
+</body>
+
+</html>

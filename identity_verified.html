@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2 style="animation: pulse 2s infinite;">IDENTITY VERIFIED</h2>
+        <div style="border-left: 3px solid #00f2ff; padding: 15px; text-align: left; margin: 20px 0; background: rgba(0, 242, 255, 0.05);">
+            <p><strong>CODENAME:</strong> {{user}}</p>
+            <p><strong>CLEARANCE:</strong> <span style="color: gold;">{{role.upper()}}</span></p>
+            <p><strong>ENCRYPTION:</strong> ACTIVE</p>
+        </div>
+        <button onclick="window.location.href='/dashboard'">ENTER MAINFRAME</button>
+        <a href="/logout" style="color: #ff003c;">TERMINATE SESSION</a>
+    </div>
+    <style>
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px #00f2ff; }
+            50% { text-shadow: 0 0 20px #00f2ff; }
+            100% { text-shadow: 0 0 5px #00f2ff; }
+        }
+    </style>
+</body>
+</html>

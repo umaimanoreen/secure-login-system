@@ -1,0 +1,85 @@
+/* ===== GLOBAL ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* ===== LOGIN CARD ===== */
+.container {
+    background: rgba(0,0,0,0.75);
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 0 30px #00ffcc;
+    animation: slideIn 1.2s ease;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes slideIn {
+    from {
+        transform: translateY(-80px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===== HEADINGS ===== */
+h2 {
+    margin-bottom: 20px;
+    color: #00ffcc;
+}
+
+/* ===== INPUTS ===== */
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+
+/* ===== BUTTON ===== */
+button {
+    width: 95%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #00ffcc;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    background: black;
+    color: #00ffcc;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+/* ===== LINKS ===== */
+a {
+    color: #00ffcc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===== ERROR MESSAGE ===== */
+.error {
+    color: red;
+    margin-top: 10px;
+}
